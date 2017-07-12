@@ -1,0 +1,70 @@
+body {
+    background-image: url("images/game_background.jpg");
+}
+
+td {
+	border: 2px solid black;
+}
+
+table {
+	border: 2px solid black;
+	border-collapse: collapse;
+    margin: 0 auto;
+}
+
+section {
+	margin: auto;
+	width: 80%;
+}
+
+.XOButton {
+	width: 100px;
+	height: 100px;
+	font-weight: normal;
+	font-size: 25px;
+}
+
+#administrative_panel {
+    background-color: sandybrown;
+    border: 3px solid saddlebrown;
+    width: 30%;
+}
+
+.XObutton {
+     position: relative;
+     background-color: moccasin;
+     border: none;
+     font-size: 28px;
+     color: black;
+     padding: 20px;
+     text-align: center;
+     -webkit-transition-duration: 0.4s; /* Safari */
+     transition-duration: 0.4s;
+     text-decoration: none;
+     overflow: hidden;
+     cursor: pointer;
+ }
+
+.XObutton:after {
+    content: "";
+    background: #f1f1f1;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.XObutton:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s;
+}
+
+.XObutton:disabled {
+    background-color: gray;
+}

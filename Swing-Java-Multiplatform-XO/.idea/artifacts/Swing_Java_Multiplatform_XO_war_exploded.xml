@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Swing-Java-Multiplatform-XO:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/Swing_Java_Multiplatform_XO_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="Swing-Java-Multiplatform-XO/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Swing-Java-Multiplatform-XO" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

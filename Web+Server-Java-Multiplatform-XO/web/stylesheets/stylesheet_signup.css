@@ -1,0 +1,60 @@
+body {
+    background-image: url("images/signup_background.jpg");
+}
+
+header {
+    font-size: 120px;
+    background-color: sandybrown;
+    border: 3px solid saddlebrown;
+    margin: auto;
+    width: 80%;
+}
+
+section {
+    margin: auto;
+    width: 30%;
+    border: 3px solid saddlebrown;
+    padding: 10px;
+}
+
+.forwardButton {
+    display: inline-block;
+    background-color: sandybrown;
+    border: none;
+    color: black;
+    text-align: center;
+    padding: 5px;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.forwardButton span, .cancelButton span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.forwardButton span:after{
+    content: '>>';
+    size: 8px;
+    color: brown;
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.forwardButton:hover span, .cancelButton:hover span {
+    padding-right: 25px;
+}
+
+.forwardButton:hover span:after, .cancelButton:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+.forwardButton:disabled {
+    background-color: gray;
+}
