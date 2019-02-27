@@ -1,3 +1,4 @@
+<%@ page import="classes.handlers.database.DatabaseHandler" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -21,7 +22,7 @@
     <br>
     <br>
     <button id="login_button" class="forwardButton"><span>Login</span></button>
-
+<%System.err.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");%>
     <button id="signup_button" class="forwardButton"><span>Signup</span></button>
 </section>
 </body>

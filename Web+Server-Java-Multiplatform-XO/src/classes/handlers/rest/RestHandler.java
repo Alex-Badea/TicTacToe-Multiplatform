@@ -4,7 +4,6 @@ import classes.handlers.database.DatabaseHandler;
 import classes.player.Player;
 import classes.player.PlayerStatus;
 import classes.Server;
-import com.sun.org.apache.regexp.internal.RE;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -25,6 +24,8 @@ public class RestHandler {
     @POST
     @Path("/login/")
     public Response login(@Context HttpServletRequest request, @FormParam("username") String username, @FormParam("password") String password) {
+        //todo
+        System.err.println("####################################################");
         HttpSession session = request.getSession();
 
         System.out.println(username + "," + password);
@@ -50,6 +51,9 @@ public class RestHandler {
     @POST
     @Path("/createAccount/")
     public Response createAccount(@Context HttpServletRequest request, @FormParam("username") String username, @FormParam("password") String password) {
+        //todo
+        System.err.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+
         if (DatabaseHandler.getInstance().addNewUsernameAndPassword(username, password)) {
             return Response.status(Response.Status.OK).entity("TRUE").build();
         } else {

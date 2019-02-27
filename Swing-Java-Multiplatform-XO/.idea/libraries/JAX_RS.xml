@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="JAX-RS" type="JAX-RS">
+  <library name="JAX-RS">
     <CLASSES>
       <root url="jar://D:/Programe/Dezvoltare/Jersey/jersey-bundle-1.19.1.jar!/" />
     </CLASSES>

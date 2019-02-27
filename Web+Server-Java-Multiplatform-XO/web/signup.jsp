@@ -21,7 +21,7 @@ Username:<input id="username_field" type="text"/>
 Password:<input id="password_field" type="password"/>
 <br>
 <br>
-<button id="create_account_button" class="forwardButton"></button>
+<button id="create_account_button" class="forwardButton">Create account</button>
 </section>
 </body>
 </html>

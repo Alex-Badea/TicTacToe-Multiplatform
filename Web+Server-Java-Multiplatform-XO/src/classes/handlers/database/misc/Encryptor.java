@@ -1,6 +1,6 @@
 package classes.handlers.database.misc;
 
-import sun.misc.BASE64Encoder;
+import java.util.Base64;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -17,10 +17,9 @@ public abstract class Encryptor {
             Cipher cipher = Cipher.getInstance("AES");
             cipher.init(Cipher.ENCRYPT_MODE, key);
             byte[] encryptedData = cipher.doFinal(data.getBytes());
-            return new BASE64Encoder().encode(encryptedData);
+            return Base64.getEncoder().encodeToString(encryptedData);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return null;
     }
 }
