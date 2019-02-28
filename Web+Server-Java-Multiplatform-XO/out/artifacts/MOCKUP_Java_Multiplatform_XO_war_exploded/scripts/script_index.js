@@ -20,7 +20,7 @@ function executeScript() {
                 }
                 else if (successful === "FALSE") {
                     //TODO probabil prea vag
-                    alert("Logarea nu a avut succes.");
+                    alert("Login unsuccessful");
                 }
             });
         };
@@ -38,7 +38,7 @@ function executeScript() {
                     startPolling();
                 }
                 else
-                    alert("Sunteți deja conectat!");
+                    alert("Already connected!");
             })
         };
 
@@ -70,7 +70,7 @@ function update() {
             }
             //n-o să se întâmple vreodată chestia asta...
             else if (currentPlayerStatus === "IN_LOBBY" && lobbyAvailable === "FALSE"){
-                alert("Lobby-ul a expirat, vei fi redirecționat.");
+                alert("Lobby expired, you will be redirected.");
                 window.location.href = "/index.jsp";
             }
         });

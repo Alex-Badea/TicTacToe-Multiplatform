@@ -31,5 +31,6 @@
     <orderEntry type="library" name="mysql-connector-java-5.1.42-bin" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Tomcat 9.0.16" level="application_server_libraries" />
     <orderEntry type="library" name="jersey-bundle-1.19.4" level="project" />
+    <orderEntry type="library" name="json-20140107" level="project" />
   </component>
 </module>

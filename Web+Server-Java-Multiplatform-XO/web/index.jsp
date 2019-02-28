@@ -22,7 +22,6 @@
     <br>
     <br>
     <button id="login_button" class="forwardButton"><span>Login</span></button>
-<%System.err.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");%>
     <button id="signup_button" class="forwardButton"><span>Signup</span></button>
 </section>
 </body>
@@ -31,7 +30,7 @@
 
 <body>
 <section>
-    Bine ai venit, <%=session.getAttribute("playerUsername")%>!
+    Welcome, <%=session.getAttribute("playerUsername")%>!
     <br>
     <br>
     <button id="logout_button" class="cancelButton"><span>Logout</span></button>

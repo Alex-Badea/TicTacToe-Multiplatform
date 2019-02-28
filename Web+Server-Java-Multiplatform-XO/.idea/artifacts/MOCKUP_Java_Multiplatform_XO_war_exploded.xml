@@ -11,6 +11,7 @@
           <element id="file-copy" path="$APPLICATION_HOME_DIR$/redist/annotations-java8.jar" />
           <element id="library" level="project" name="mysql-connector-java-5.1.42-bin" />
           <element id="library" level="project" name="jersey-bundle-1.19.4" />
+          <element id="library" level="project" name="json-20140107" />
         </element>
       </element>
     </root>

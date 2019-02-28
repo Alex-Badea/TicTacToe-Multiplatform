@@ -64,18 +64,18 @@ function update(tableButtons) {
 
                         if (winningPlayer !== "NULL" && winningPlayer !== "TIE") {
                             clearInterval(pollInterval);
-                            alert("A câștigat " + winningPlayer + "!");
+                            alert(winningPlayer + " won!");
                         }
                         else if (winningPlayer === "TIE") {
                             clearInterval(pollInterval);
-                            alert("Remiză");
+                            alert("Tie");
                         }
                     });
                 });
             });
         }
         else {
-            alert("Sesiunea a expirat, vei fi redirecționat.");
+            alert("Session expired, you will be redirected.");
             window.location.href = "/index.jsp";
         }
     });

@@ -17,7 +17,7 @@ function executeScript() {
                 window.location.href = "/index.jsp";
             }
             else if (successful === "FALSE") {
-                alert("Contul nu a putut fi creat.");
+                alert("Error creating account");
             }
         });
     };

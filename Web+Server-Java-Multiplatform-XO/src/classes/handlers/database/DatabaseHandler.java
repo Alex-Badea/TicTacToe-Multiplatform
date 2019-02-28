@@ -5,7 +5,14 @@
  */
 package classes.handlers.database;
 
+import java.io.File;
+import java.nio.file.Paths;
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Scanner;
+
+import org.json.*;
+
 import classes.handlers.database.misc.*;
 
 /**
@@ -19,15 +26,18 @@ public class DatabaseHandler {
         return ourInstance;
     }
 
+    private final String DB_NAME;
     private final String DB_URL;
     private final String DB_USER;
     private final String DB_PASS;
 
     ////Initializeaza baza de date
     private DatabaseHandler() {
-        DB_URL = "jdbc:mysql://127.0.0.1/database";
-        DB_USER = "admin";
-        DB_PASS = "admin";
+        HashMap<String, String> dbInfo = getDbCredentialsFromSensitiveData();
+        DB_NAME = dbInfo.get("dbName");
+        DB_URL = "jdbc:mysql://" + dbInfo.get("dbUrl");
+        DB_USER = dbInfo.get("dbUser");
+        DB_PASS = dbInfo.get("dbPass");
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -42,7 +52,7 @@ public class DatabaseHandler {
         String encryptedPassword = Encryptor.encrypt(password, "ILOVEROCKANDROLL");
 
         try(Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-            PreparedStatement ps = connection.prepareStatement("SELECT encryptedPassword FROM users WHERE username = ?")) {
+            PreparedStatement ps = connection.prepareStatement("SELECT encryptedPassword FROM " + DB_NAME + ".User WHERE username = ?")) {
 
             ps.setString(1, username);
 
@@ -68,7 +78,7 @@ public class DatabaseHandler {
         String encryptedPassword = Encryptor.encrypt(password, "ILOVEROCKANDROLL");
 
         try(Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO users (username, encryptedPassword) VALUES (?, ?)")) {
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO " + DB_NAME + ".User (username, encryptedPassword) VALUES (?, ?)")) {
 
             ps.setString(1, username);
             ps.setString(2, encryptedPassword);
@@ -86,7 +96,7 @@ public class DatabaseHandler {
     //Persistarea match-ului in baza de date, nume jucator X, nume jucator O si castigatorul
     public void insertMatchInDatabase(String xPlayer, String oPlayer, String winningPlayer, Timestamp startDate, Timestamp endDate, String tableStateJson){
         try(Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO matches (xPlayer, oPlayer, winningPlayer, startDate, endDate, tableState) VALUES (?, ?, ?, ?, ?, ?)")) {
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO " + DB_NAME + ".Match (xPlayer, oPlayer, winningPlayer, startDate, endDate, tableState) VALUES (?, ?, ?, ?, ?, ?)")) {
 
             ps.setString(1, xPlayer);
             ps.setString(2, oPlayer);
@@ -103,7 +113,7 @@ public class DatabaseHandler {
 
     public void incrementGamesPlayed(String username) {
         try(Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-            PreparedStatement ps = connection.prepareStatement("UPDATE users SET gamesPlayed = gamesPlayed + 1 WHERE username = ?")) {
+            PreparedStatement ps = connection.prepareStatement("UPDATE " + DB_NAME + ".User SET gamesPlayedNo = gamesPlayedNo + 1 WHERE username = ?")) {
             ps.setString(1, username);
             ps.executeUpdate();
 
@@ -114,7 +124,7 @@ public class DatabaseHandler {
 
     public void incrementGamesWon(String username) {
         try(Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-            PreparedStatement ps = connection.prepareStatement("UPDATE users SET gamesWon = gamesWon + 1 WHERE username = ?")) {
+            PreparedStatement ps = connection.prepareStatement("UPDATE " + DB_NAME + ".User SET gamesWonNo = gamesWonNo + 1 WHERE username = ?")) {
             ps.setString(1, username);
             ps.executeUpdate();
 
@@ -125,12 +135,28 @@ public class DatabaseHandler {
 
     public void incrementGamesLost(String username) {
         try(Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-            PreparedStatement ps = connection.prepareStatement("UPDATE users SET gamesLost = gamesLost + 1 WHERE username = ?")) {
+            PreparedStatement ps = connection.prepareStatement("UPDATE " + DB_NAME + ".User SET gamesLostNo = gamesLostNo + 1 WHERE username = ?")) {
             ps.setString(1, username);
             ps.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private HashMap<String, String> getDbCredentialsFromSensitiveData() {
+        HashMap<String, String> dbInfo = new HashMap<>();
+        try {
+            String content = new Scanner(new File(Paths.get("").toAbsolutePath().getParent().getParent().getParent().
+                    toString() + "/SENSITIVE_DATA.txt")).useDelimiter("\\Z").next();
+            JSONObject reader = new JSONObject(content);
+            dbInfo.put("dbName", reader.getString("dbName"));
+            dbInfo.put("dbUrl", reader.getString("dbUrl"));
+            dbInfo.put("dbUser", reader.getString("dbUser"));
+            dbInfo.put("dbPass", reader.getString("dbPass"));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return dbInfo;
     }
 }
